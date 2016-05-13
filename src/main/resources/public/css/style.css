@@ -1,0 +1,191 @@
+body {
+    background: #E9EBEE;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 14px;
+}
+
+a {
+    color: #3B5998;
+}
+
+a:hover {
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    background: white;
+    border: 1px solid #BFE6FF;
+    padding: 2px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    color: #3B5998;
+}
+
+input[type="submit"] {
+    background: #3B5998;
+    border: 1px solid #3B5998;
+    padding: 1px 3px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    color: white;
+}
+
+div.page {
+    background: white;
+    border: 1px solid #3B5998;
+    width: 750px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+div.page h1 {
+    background: #3B5998;
+    margin: 0;
+    padding: 10px 14px;
+    color: white;
+    letter-spacing: 1px;
+    text-shadow: 0 0 3px #3B5998;
+    font-weight: normal;
+    text-align: center;
+}
+
+div.page div.navigation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+    text-align: left;
+
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+div.page div.navigation a {
+    display: inline-block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+div.page div.navigation a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+div.page div.navigation a.active {
+    color: white;
+    background-color: #4CAF50;
+}
+
+
+div.page h2 {
+    margin: 0 0 15px 0;
+    color: #3B5998;
+    text-shadow: 0 1px 2px #ccc;
+}
+
+div.page div.body {
+    padding: 10px;
+}
+
+div.page div.footer {
+    background: #eee;
+    color: #888;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+div.page div.followstatus {
+    border: 1px solid #ccc;
+    background: #E3EBFF;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 3px;
+    font-size: 13px;
+}
+
+div.page ul.messages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+div.page ul.messages li {
+    margin: 10px 0;
+    padding: 5px;
+    background: #F0FAFF;
+    border: 1px solid #DBF3FF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    min-height: 48px;
+}
+
+div.page ul.messages p {
+    margin: 0;
+}
+
+div.page ul.messages li img {
+    float: left;
+    padding: 0 10px 0 0;
+}
+
+div.page ul.messages li small {
+    font-size: 0.9em;
+    color: #888;
+}
+
+div.page div.twitbox {
+    margin: 10px 0;
+    padding: 5px;
+    background: #F0FAFF;
+    border: 1px solid #3B5998;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+div.page div.twitbox h3 {
+    margin: 0;
+    font-size: 1em;
+    color: #3B5998;
+}
+
+div.page div.twitbox p {
+    margin: 0;
+}
+
+div.page div.twitbox input[type="text"] {
+    width: 585px;
+}
+
+div.page div.twitbox input[type="submit"] {
+    width: 70px;
+    margin-left: 5px;
+}
+
+div.error {
+    margin: 10px 0;
+    background: #FAE4E4;
+    border: 1px solid #DD6F6F;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 4px;
+    font-size: 13px;
+}
+
+div.success {
+    margin: 10px 0;
+    background: #FAFFE4;
+    border: 1px solid #DDFF6F;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 4px;
+    font-size: 13px;
+}
