@@ -1,14 +1,14 @@
-Extended String Calculator
+### Extended String Calculator
 
 Java version of Extended String Calculator example built with the Spark web microframework, Freemarker, Spring and HSQLDB (as an in-memory database).
 
-Prerequisites
+### Prerequisites
 
 Java 8
 
 Maven
 
-How to run it
+### How to run it
 
 Clone the repository and go to the root directory.
 
