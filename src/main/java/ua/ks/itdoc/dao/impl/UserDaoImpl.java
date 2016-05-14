@@ -24,9 +24,10 @@ public class UserDaoImpl implements UserDao {
         template = new NamedParameterJdbcTemplate(ds);
     }
 
+    @SuppressWarnings("SqlResolve")
     @Override
     public User getUserbyUsername(String username) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("name", username);
 
         String sql = "SELECT * FROM user WHERE username=:name";
@@ -46,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void insertFollower(User follower, User followee) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("follower", follower.getId());
         params.put("followee", followee.getId());
 
@@ -57,7 +58,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteFollower(User follower, User followee) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("follower", follower.getId());
         params.put("followee", followee.getId());
 
@@ -68,7 +69,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean isUserFollower(User follower, User followee) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("follower", follower.getId());
         params.put("followee", followee.getId());
 
@@ -82,7 +83,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void registerUser(User user) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("username", user.getUsername());
         params.put("email", user.getEmail());
         params.put("pw", user.getPassword());

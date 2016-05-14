@@ -184,7 +184,7 @@ public class WebConfig {
             Map<String, Object> map = new HashMap<>();
             User user = new User();
             try {
-                MultiMap<String> params = new MultiMap<String>();
+                MultiMap<String> params = new MultiMap<>();
                 UrlEncoded.decodeTo(req.body(), params, "UTF-8", -1);
                 BeanUtils.populate(user, params);
             } catch (Exception e) {
@@ -229,7 +229,7 @@ public class WebConfig {
             Map<String, Object> map = new HashMap<>();
             User user = new User();
             try {
-                MultiMap<String> params = new MultiMap<String>();
+                MultiMap<String> params = new MultiMap<>();
                 UrlEncoded.decodeTo(req.body(), params, "UTF-8", -1);
                 BeanUtils.populate(user, params);
             } catch (Exception e) {
@@ -269,7 +269,7 @@ public class WebConfig {
 		 */
         post("/message", (req, res) -> {
             User user = getAuthenticatedUser(req);
-            MultiMap<String> params = new MultiMap<String>();
+            MultiMap<String> params = new MultiMap<>();
             UrlEncoded.decodeTo(req.body(), params, "UTF-8", -1);
             Message m = new Message();
             m.setUserId(user.getId());

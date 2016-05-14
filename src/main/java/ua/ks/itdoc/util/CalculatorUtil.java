@@ -81,9 +81,9 @@ public class CalculatorUtil {
     }
 
     private static Double calculate(String stringInput) throws Exception {
-        double doubleA = 0, doubleB = 0;
+        double doubleA, doubleB;
         String stringTmp;
-        Deque<Double> stack = new ArrayDeque<Double>();
+        Deque<Double> stack = new ArrayDeque<>();
         StringTokenizer st = new StringTokenizer(stringInput);
         while (st.hasMoreTokens()) {
             try {

@@ -1,5 +1,7 @@
 package ua.ks.itdoc.dao.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import ua.ks.itdoc.model.Message;
 import ua.ks.itdoc.model.User;
 import ua.ks.itdoc.util.GravatarUtil;
 
+@SuppressWarnings("ALL")
 @Repository
 public class MessageDaoImpl implements MessageDao {
 
@@ -30,7 +33,7 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public List<Message> getUserTimelineMessages(User user) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("id", user.getId());
 
         String sql = "select message.*, user.* from message, user where " +
@@ -43,7 +46,7 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public List<Message> getUserFullTimelineMessages(User user) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("id", user.getId());
 
         String sql = "select message.*, user.* from message, user " +
@@ -59,7 +62,7 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public List<Message> getPublicTimelineMessages() {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
 
         String sql = "select message.*, user.* from message, user " +
                 "where message.author_id = user.user_id " +
@@ -71,7 +74,7 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public void insertMessage(Message m) throws Exception {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("userId", m.getUserId());
         params.put("text", m.getText());
         params.put("result", m.getResult());
@@ -90,7 +93,13 @@ public class MessageDaoImpl implements MessageDao {
         m.setText(rs.getString("text"));
         m.setResult(rs.getString("result"));
         m.setPubDate(rs.getTimestamp("pub_date"));
-        m.setGravatar(GravatarUtil.gravatarURL(rs.getString("email"), GRAVATAR_DEFAULT_IMAGE_TYPE, GRAVATAR_SIZE));
+        try {
+            m.setGravatar(GravatarUtil.gravatarURL(rs.getString("email"), GRAVATAR_DEFAULT_IMAGE_TYPE, GRAVATAR_SIZE));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         return m;
     };
