@@ -18,7 +18,7 @@ Java version of Extended String Calculator example built with the Spark web micr
 
 4. Log in as user001 with password user001, or user002/user002, or user003/user003 until user010/user010, or sign up yourself. If your e-mail address has an associated Gravatar image, this will be used as your profile image.
 
-5. Enter your task after login and see a result in a history. 
+5. Enter your task after login and see a result in a timeline history. 
  
 7. Users can follow and unfollow one after another. All results are stored to DataBase.
 
