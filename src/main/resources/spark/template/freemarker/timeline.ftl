@@ -16,7 +16,7 @@
         		<h3>Please enter your task ${user.username}?</h3>
         		<form action="/message" method="post">
           		<p><input type="text" name="text" size="60" maxlength="160"><!--
-          		--><input type="submit" value="Calculate $ Share">
+          		--><input type="submit" value="Calculate">
         		</form>
       		</div>
     	</#if>
@@ -25,9 +25,10 @@
     <#if messages??>
     <#list messages as message>
 		<li><img src="${message.gravatar}"><p>
-		<strong><a href="/t/${message.username}">${message.username}</a></strong>
-		${message.text}
-		<small>&mdash; ${message.pubDateStr}</small>
+		<strong><a  style="float: left" href="/t/${message.username}">${message.username}</a></strong>
+		Expression:&nbsp; ${message.text} &nbsp;|&nbsp;
+		Result: &nbsp;${message.result}
+		<a style="float: right"><small> ${message.pubDateStr}</small></a>
 	<#else>
 		<li><em>There're no messages so far.</em>
 	</#list>

@@ -49,7 +49,7 @@ public class CalculatorService {
         return userDao.isUserFollower(follower, followee);
     }
 
-    public void addMessage(Message message) {
+    public void addMessage(Message message) throws Exception {
         messageDao.insertMessage(message);
     }
 

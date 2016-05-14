@@ -70,13 +70,14 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    public void insertMessage(Message m) {
+    public void insertMessage(Message m) throws Exception {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("userId", m.getUserId());
         params.put("text", m.getText());
+        params.put("result", m.getResult());
         params.put("pubDate", m.getPubDate());
 
-        String sql = "insert into message (author_id, text, pub_date) values (:userId, :text, :pubDate)";
+        String sql = "insert into message (author_id, text, result, pub_date) values (:userId, :text, :result, :pubDate)";
         template.update(sql, params);
     }
 
@@ -87,6 +88,7 @@ public class MessageDaoImpl implements MessageDao {
         m.setUserId(rs.getInt("author_id"));
         m.setUsername(rs.getString("username"));
         m.setText(rs.getString("text"));
+        m.setResult(rs.getString("result"));
         m.setPubDate(rs.getTimestamp("pub_date"));
         m.setGravatar(GravatarUtil.gravatarURL(rs.getString("email"), GRAVATAR_DEFAULT_IMAGE_TYPE, GRAVATAR_SIZE));
 

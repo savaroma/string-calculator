@@ -1,5 +1,7 @@
 package ua.ks.itdoc.model;
 
+import ua.ks.itdoc.util.CalculatorUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,9 +11,11 @@ public class Message {
     private int userId;
     private String username;
     private String text;
+    private String result;
     private Date pubDate;
     private String pubDateStr;
     private String gravatar;
+
 
     public int getId() {
         return id;
@@ -41,8 +45,17 @@ public class Message {
         return text;
     }
 
+    public String getResult() throws Exception {
+        result = CalculatorUtil.calculator(this.text);
+        return result;
+    }
+
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public Date getPubDate() {

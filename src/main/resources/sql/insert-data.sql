@@ -14,7 +14,4 @@ INSERT INTO follower(follower_id, followee_id) VALUES (1, 7);
 INSERT INTO follower(follower_id, followee_id) VALUES (1, 10);
 INSERT INTO follower(follower_id, followee_id) VALUES (1, 9);
 
-INSERT INTO message(author_id, text, pub_date) VALUES (1, 'This is a message written by user user001', TIMESTAMP '2014-01-15 02:00:22');
-INSERT INTO message(author_id, text, pub_date) VALUES (1, 'This is a message written by user user001', TIMESTAMP '2014-10-25 10:09:55');
-INSERT INTO message(author_id, text, pub_date) VALUES (1, 'This is a message written by user user001', TIMESTAMP '2014-07-14 09:46:28');
-INSERT INTO message(author_id, text, pub_date) VALUES (1, 'This is a message written by user user001', TIMESTAMP '2014-01-15 11:35:07');
+INSERT INTO message(author_id, text, result, pub_date) VALUES (1,'2+2','4', TIMESTAMP '2014-01-15 02:00:22');
