@@ -1,6 +1,6 @@
 #Extended String Calculator
 
-Java version of Extended String Calculator example built with the Spark web microframework, Freemarker, Spring and HSQLDB (as an in-memory database).
+Java version of Extended String Calculator example built with the Spark web microframework, Freemarker, Log4J logging, Spring and HSQLDB (as an in-memory database).
 
 ##Prerequisites
 
@@ -21,4 +21,7 @@ Java version of Extended String Calculator example built with the Spark web micr
 5. Enter your task after login and see a result in a timeline history. 
  
 7. Users can follow and unfollow one after another. All results are stored to DataBase.
+
+8. All logs are saved to a file on disk. PATH:  C:\TMP\log_file.txt
+
 
