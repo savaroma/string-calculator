@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
 
@@ -26,6 +27,9 @@ import spark.template.freemarker.FreeMarkerEngine;
 import spark.utils.StringUtils;
 
 public class WebConfig {
+
+    //Logger initialization
+    private static final Logger log = Logger.getLogger(WebConfig.class);
 
     private static final String USER_SESSION_ID = "user";
     private MainAppService service;
@@ -44,6 +48,10 @@ public class WebConfig {
 		 *  This timeline shows the user's messages as well
 		 *  as all the messages of followed users.
 		 */
+        log.info("=========================");
+        log.info("Setup complete. App Start");
+        log.info("=========================");
+
         get("/", (req, res) -> {
             User user = getAuthenticatedUser(req);
             Map<String, Object> map = new HashMap<>();
@@ -69,6 +77,7 @@ public class WebConfig {
             Map<String, Object> map = new HashMap<>();
             map.put("pageTitle", "Public Timeline");
             map.put("user", user);
+            log.info("Displays the latest messages of all users");
             List<Message> messages = service.getPublicTimelineMessages();
             map.put("messages", messages);
             return new ModelAndView(map, "timeline.ftl");
@@ -81,7 +90,7 @@ public class WebConfig {
         get("/t/:username", (req, res) -> {
             String username = req.params(":username");
             User profileUser = service.getUserbyUsername(username);
-
+            log.info("Displays a user's tweets");
             User authUser = getAuthenticatedUser(req);
             boolean followed = false;
             if (authUser != null) {
@@ -102,6 +111,7 @@ public class WebConfig {
 		 */
         before("/t/:username", (req, res) -> {
             String username = req.params(":username");
+            log.info("Checks if the user " + username + " exists");
             User profileUser = service.getUserbyUsername(username);
             if (profileUser == null) {
                 halt(404, "User not Found");
@@ -116,7 +126,7 @@ public class WebConfig {
             String username = req.params(":username");
             User profileUser = service.getUserbyUsername(username);
             User authUser = getAuthenticatedUser(req);
-
+            log.info(" Adds the current user as follower of the given user.");
             service.followUser(authUser, profileUser);
             res.redirect("/t/" + username);
             return null;
@@ -144,17 +154,18 @@ public class WebConfig {
             String username = req.params(":username");
             User profileUser = service.getUserbyUsername(username);
             User authUser = getAuthenticatedUser(req);
-
+            log.info("Removes the current user as follower of the given user.");
             service.unfollowUser(authUser, profileUser);
             res.redirect("/t/" + username);
             return null;
         });
         /*
-		 * Checks if the user is authenticated and the user to unfollow exists
+         * Checks if the user is authenticated and the user to unfollow exists
 		 */
         before("/t/:username/unfollow", (req, res) -> {
             String username = req.params(":username");
             User authUser = getAuthenticatedUser(req);
+            log.info("Checks if the user is authenticated and the user to unfollow exists");
             User profileUser = service.getUserbyUsername(username);
             if (authUser == null) {
                 res.redirect("/login");
@@ -166,18 +177,20 @@ public class WebConfig {
 
 
 		/*
-		 * Presents the login form or redirect the user to
+         * Presents the login form or redirect the user to
 		 * her timeline if it's already logged in
 		 */
         get("/login", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
+            log.info("Login form");
             if (req.queryParams("r") != null) {
                 map.put("message", "You were successfully registered and can login now");
+                log.info("Login success");
             }
             return new ModelAndView(map, "login.ftl");
         }, new FreeMarkerEngine());
-		/*
-		 * Logs the user in.
+        /*
+         * Logs the user in.
 		 */
         post("/login", (req, res) -> {
             Map<String, Object> map = new HashMap<>();
@@ -186,6 +199,8 @@ public class WebConfig {
                 MultiMap<String> params = new MultiMap<>();
                 UrlEncoded.decodeTo(req.body(), params, "UTF-8", -1);
                 BeanUtils.populate(user, params);
+                log.info("User " + user.getUsername() + " log in");
+
             } catch (Exception e) {
                 halt(501);
                 return null;
@@ -231,6 +246,8 @@ public class WebConfig {
                 MultiMap<String> params = new MultiMap<>();
                 UrlEncoded.decodeTo(req.body(), params, "UTF-8", -1);
                 BeanUtils.populate(user, params);
+                log.info("User " + user.getUsername() + " registered");
+
             } catch (Exception e) {
                 halt(501);
                 return null;
@@ -274,6 +291,8 @@ public class WebConfig {
             m.setPubDate(new Date());
             BeanUtils.populate(m, params);
             service.addMessage(m);
+            log.info("Expression is added to DataBase: " + m.getText() + " = " + m.getCalculate());
+
             res.redirect("/");
             return null;
         });
@@ -292,6 +311,7 @@ public class WebConfig {
 		 * Logs the user out and redirects to the public timeline
 		 */
         get("/logout", (req, res) -> {
+            log.info("User is log out" + getAuthenticatedUser(req).getUsername());
             removeAuthenticatedUser(req);
             res.redirect("/public");
             return null;

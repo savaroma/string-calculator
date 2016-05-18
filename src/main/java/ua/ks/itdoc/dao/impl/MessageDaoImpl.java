@@ -77,7 +77,7 @@ public class MessageDaoImpl implements MessageDao {
         Map<String, Object> params = new HashMap<>();
         params.put("userId", m.getUserId());
         params.put("text", m.getText());
-        params.put("result", m.getResult());
+        params.put("result", m.getCalculate());
         params.put("pubDate", m.getPubDate());
 
         String sql = "INSERT INTO message (author_id, text, result, pub_date) VALUES (:userId, :text, :result, :pubDate)";

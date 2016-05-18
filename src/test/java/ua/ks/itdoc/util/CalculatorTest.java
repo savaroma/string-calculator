@@ -33,5 +33,4 @@ public class CalculatorTest {
 
         assertEquals("40.0", calculateString(testStr));
     }
-
 }

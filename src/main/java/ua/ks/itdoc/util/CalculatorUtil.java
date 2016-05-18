@@ -1,10 +1,16 @@
 package ua.ks.itdoc.util;
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 public class CalculatorUtil {
 
+    //Logger initialization
+    private static final Logger log = Logger.getLogger(CalculatorUtil.class);
+
     public static String calculateString(String stringInput) throws Exception {
+
         if (stringInput.isEmpty()) {
             throw new Exception("Expression is empty");
         } else {
@@ -13,6 +19,9 @@ public class CalculatorUtil {
     }
 
     private static String parsingToReversePolishNotation(String stringInput) throws Exception {
+
+        log.info("parsing string " + stringInput + " to Reverse Polish Notation!");
+
         StringBuilder stringBuilderStack = new StringBuilder(""), stringBuilderOut = new StringBuilder("");
         char charIn, charTmp;
 
@@ -57,6 +66,8 @@ public class CalculatorUtil {
             stringBuilderStack.setLength(stringBuilderStack.length() - 1);
         }
 
+        log.info("parsing is OK. Result: " + stringBuilderOut.toString());
+
         return stringBuilderOut.toString();
     }
 
@@ -85,6 +96,9 @@ public class CalculatorUtil {
     }
 
     private static Double calculateFromReversePolishNotation(String stringInput) throws Exception {
+
+        log.info("Start of calculation from Reverse Polish Notation " + stringInput);
+
         double doubleA, doubleB;
         String stringTmp;
         Deque<Double> stack = new ArrayDeque<>();
@@ -144,6 +158,7 @@ public class CalculatorUtil {
             throw new Exception("Number of operators is not equal of operands number");
         }
 
-        return stack.pop();
+        Double result = stack.pop();
+        return result;
     }
 }

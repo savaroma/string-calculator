@@ -1,5 +1,6 @@
 package ua.ks.itdoc.model;
 
+import org.apache.log4j.Logger;
 import ua.ks.itdoc.util.CalculatorUtil;
 
 import java.text.SimpleDateFormat;
@@ -15,6 +16,9 @@ public class Message {
     private Date pubDate;
     private String pubDateStr;
     private String gravatar;
+
+    //Logger initialization
+    private static final Logger log = Logger.getLogger(CalculatorUtil.class);
 
 
     public int getId() {
@@ -46,7 +50,6 @@ public class Message {
     }
 
     public String getResult() throws Exception {
-        result = getCalculate();
         return result;
     }
 
@@ -81,13 +84,17 @@ public class Message {
         this.gravatar = gravatar;
     }
 
-    private String getCalculate() {
+    public String getCalculate() {
+        log.info("Calculate expression " + this.text + " is started.");
         String result;
         try {
             result = CalculatorUtil.calculateString(this.text);
         } catch (Exception e) {
+            log.error("ERROR: " + e.getMessage());
             result = e.getMessage();
         }
+
+        log.info("Calculation is OK. Result is: " + result);
         return result;
     }
 }
