@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import ua.ks.itdoc.config.WebConfig;
-import ua.ks.itdoc.service.impl.CalculatorService;
+import ua.ks.itdoc.service.impl.MainAppService;
 
 @Configuration
 @ComponentScan({"ua.ks.itdoc"})
@@ -13,8 +13,8 @@ import ua.ks.itdoc.service.impl.CalculatorService;
 public class App {
 
     public static void main(String[] args) {
-    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
-        new WebConfig(ctx.getBean(CalculatorService.class));
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+        new WebConfig(ctx.getBean(MainAppService.class));
         ctx.registerShutdownHook();
 
     }

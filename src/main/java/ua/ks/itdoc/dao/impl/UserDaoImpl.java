@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
                 userMapper);
 
         User result = null;
-        if(list != null && !list.isEmpty()) {
+        if (list != null && !list.isEmpty()) {
             result = list.get(0);
         }
 
@@ -51,9 +51,9 @@ public class UserDaoImpl implements UserDao {
         params.put("follower", follower.getId());
         params.put("followee", followee.getId());
 
-        String sql = "insert into follower (follower_id, followee_id) values (:follower, :followee)";
+        String sql = "INSERT INTO follower (follower_id, followee_id) VALUES (:follower, :followee)";
 
-        template.update(sql,  params);
+        template.update(sql, params);
     }
 
     @Override
@@ -62,9 +62,9 @@ public class UserDaoImpl implements UserDao {
         params.put("follower", follower.getId());
         params.put("followee", followee.getId());
 
-        String sql = "delete from follower where follower_id = :follower and followee_id = :followee";
+        String sql = "DELETE FROM follower WHERE follower_id = :follower AND followee_id = :followee";
 
-        template.update(sql,  params);
+        template.update(sql, params);
     }
 
     @Override
@@ -73,8 +73,8 @@ public class UserDaoImpl implements UserDao {
         params.put("follower", follower.getId());
         params.put("followee", followee.getId());
 
-        String sql = "select count(1) from follower where " +
-                "follower.follower_id = :follower and follower.followee_id = :followee";
+        String sql = "SELECT count(1) FROM follower WHERE " +
+                "follower.follower_id = :follower AND follower.followee_id = :followee";
 
         Long l = template.queryForObject(sql, params, Long.class);
 
@@ -88,9 +88,9 @@ public class UserDaoImpl implements UserDao {
         params.put("email", user.getEmail());
         params.put("pw", user.getPassword());
 
-        String sql = "insert into user (username, email, pw) values (:username, :email, :pw)";
+        String sql = "INSERT INTO user (username, email, pw) VALUES (:username, :email, :pw)";
 
-        template.update(sql,  params);
+        template.update(sql, params);
     }
 
     private RowMapper<User> userMapper = (rs, rowNum) -> {

@@ -14,4 +14,6 @@ INSERT INTO follower(follower_id, followee_id) VALUES (1, 7);
 INSERT INTO follower(follower_id, followee_id) VALUES (1, 10);
 INSERT INTO follower(follower_id, followee_id) VALUES (1, 9);
 
-INSERT INTO message(author_id, text, result, pub_date) VALUES (1,'2+2','4', TIMESTAMP '2014-01-15 02:00:22');
+INSERT INTO message(author_id, text, result, pub_date) VALUES (10,'2+2','4', TIMESTAMP '2014-01-15 02:00:22');
+INSERT INTO message(author_id, text, result, pub_date) VALUES (10,'123.12 + 34 * (12 - 10)','191.12', TIMESTAMP '2014-01-15 02:00:22');
+INSERT INTO message(author_id, text, result, pub_date) VALUES (10,'-123.12 + 34','-89.12', TIMESTAMP '2014-01-15 02:00:22');

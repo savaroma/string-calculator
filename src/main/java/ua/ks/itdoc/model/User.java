@@ -58,13 +58,13 @@ public class User {
     public String validate() {
         String error = null;
 
-        if(StringUtils.isEmpty(username)) {
+        if (StringUtils.isEmpty(username)) {
             error = "You have to enter a username";
-        } else if(!EMAIL_ADDRESS_REGEX.matcher(email).matches()) {
+        } else if (!EMAIL_ADDRESS_REGEX.matcher(email).matches()) {
             error = "You have to enter a valid email address";
-        } else if(StringUtils.isEmpty(password)) {
+        } else if (StringUtils.isEmpty(password)) {
             error = "You have to enter a password";
-        } else if(!password.equals(password2)) {
+        } else if (!password.equals(password2)) {
             error = "The two passwords do not match";
         }
 

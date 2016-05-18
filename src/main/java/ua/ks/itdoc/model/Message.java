@@ -46,7 +46,7 @@ public class Message {
     }
 
     public String getResult() throws Exception {
-        result = CalculatorUtil.calculator(this.text);
+        result = getCalculate();
         return result;
     }
 
@@ -79,5 +79,15 @@ public class Message {
 
     public void setGravatar(String gravatar) {
         this.gravatar = gravatar;
+    }
+
+    private String getCalculate() {
+        String result;
+        try {
+            result = CalculatorUtil.calculateString(this.text);
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+        return result;
     }
 }

@@ -13,7 +13,7 @@ import ua.ks.itdoc.model.User;
 import ua.ks.itdoc.util.PasswordUtil;
 
 @Service
-public class CalculatorService {
+public class MainAppService {
 
     @Autowired
     private UserDao userDao;
@@ -56,9 +56,9 @@ public class CalculatorService {
     public LoginResult checkUser(User user) {
         LoginResult result = new LoginResult();
         User userFound = userDao.getUserbyUsername(user.getUsername());
-        if(userFound == null) {
+        if (userFound == null) {
             result.setError("Invalid username");
-        } else if(!PasswordUtil.verifyPassword(user.getPassword(), userFound.getPassword())) {
+        } else if (!PasswordUtil.verifyPassword(user.getPassword(), userFound.getPassword())) {
             result.setError("Invalid password");
         } else {
             result.setUser(userFound);

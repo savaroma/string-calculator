@@ -36,9 +36,9 @@ public class MessageDaoImpl implements MessageDao {
         Map<String, Object> params = new HashMap<>();
         params.put("id", user.getId());
 
-        String sql = "select message.*, user.* from message, user where " +
-                "user.user_id = message.author_id and user.user_id = :id " +
-                "order by message.pub_date desc";
+        String sql = "SELECT message.*, user.* FROM message, user WHERE " +
+                "user.user_id = message.author_id AND user.user_id = :id " +
+                "ORDER BY message.pub_date DESC";
         List<Message> result = template.query(sql, params, messageMapper);
 
         return result;
@@ -49,12 +49,12 @@ public class MessageDaoImpl implements MessageDao {
         Map<String, Object> params = new HashMap<>();
         params.put("id", user.getId());
 
-        String sql = "select message.*, user.* from message, user " +
-                "where message.author_id = user.user_id and ( " +
-                "user.user_id = :id or " +
-                "user.user_id in (select followee_id from follower " +
-                "where follower_id = :id))" +
-                "order by message.pub_date desc";
+        String sql = "SELECT message.*, user.* FROM message, user " +
+                "WHERE message.author_id = user.user_id AND ( " +
+                "user.user_id = :id OR " +
+                "user.user_id IN (SELECT followee_id FROM follower " +
+                "WHERE follower_id = :id))" +
+                "ORDER BY message.pub_date DESC";
         List<Message> result = template.query(sql, params, messageMapper);
 
         return result;
@@ -64,9 +64,9 @@ public class MessageDaoImpl implements MessageDao {
     public List<Message> getPublicTimelineMessages() {
         Map<String, Object> params = new HashMap<>();
 
-        String sql = "select message.*, user.* from message, user " +
-                "where message.author_id = user.user_id " +
-                "order by message.pub_date desc";
+        String sql = "SELECT message.*, user.* FROM message, user " +
+                "WHERE message.author_id = user.user_id " +
+                "ORDER BY message.pub_date DESC";
         List<Message> result = template.query(sql, params, messageMapper);
 
         return result;
@@ -80,7 +80,7 @@ public class MessageDaoImpl implements MessageDao {
         params.put("result", m.getResult());
         params.put("pubDate", m.getPubDate());
 
-        String sql = "insert into message (author_id, text, result, pub_date) values (:userId, :text, :result, :pubDate)";
+        String sql = "INSERT INTO message (author_id, text, result, pub_date) VALUES (:userId, :text, :result, :pubDate)";
         template.update(sql, params);
     }
 
@@ -100,7 +100,6 @@ public class MessageDaoImpl implements MessageDao {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
         return m;
     };
 

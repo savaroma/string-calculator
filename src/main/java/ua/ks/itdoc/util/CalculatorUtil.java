@@ -4,20 +4,21 @@ import java.util.*;
 
 public class CalculatorUtil {
 
-    public static String calculator(String stringInput) throws Exception {
-        String resCalc = calc(stringInput);
-        return Double.toString(calculate(resCalc));
-
+    public static String calculateString(String stringInput) throws Exception {
+        if (stringInput.isEmpty()) {
+            throw new Exception("Expression is empty");
+        } else {
+            return Double.toString(calculateFromReversePolishNotation(parsingToReversePolishNotation(stringInput)));
+        }
     }
 
-    private static String calc(String stringInput) throws Exception {
+    private static String parsingToReversePolishNotation(String stringInput) throws Exception {
         StringBuilder stringBuilderStack = new StringBuilder(""), stringBuilderOut = new StringBuilder("");
         char charIn, charTmp;
 
         for (int i = 0; i < stringInput.length(); i++) {
             charIn = stringInput.charAt(i);
             if (isOperand(charIn)) {
-                if (stringInput.charAt(i) == '-' && i == 0){ stringBuilderOut.append(charIn);}
                 while (stringBuilderStack.length() > 0) {
                     charTmp = stringBuilderStack.substring(stringBuilderStack.length() - 1).charAt(0);
                     if (isOperand(charTmp) && (operandPriority(charIn) <= operandPriority(charTmp))) {
@@ -29,7 +30,10 @@ public class CalculatorUtil {
                     }
                 }
                 stringBuilderOut.append(" ");
-                stringBuilderStack.append(charIn);
+                if ('-' == stringInput.charAt(i) && 0 == i) {
+                    stringBuilderOut.append(charIn);
+                } else
+                    stringBuilderStack.append(charIn);
             } else if ('(' == charIn) {
                 stringBuilderStack.append(charIn);
             } else if (')' == charIn) {
@@ -80,7 +84,7 @@ public class CalculatorUtil {
         return 1; //  + & -
     }
 
-    private static Double calculate(String stringInput) throws Exception {
+    private static Double calculateFromReversePolishNotation(String stringInput) throws Exception {
         double doubleA, doubleB;
         String stringTmp;
         Deque<Double> stack = new ArrayDeque<>();
@@ -102,8 +106,12 @@ public class CalculatorUtil {
                             doubleA -= doubleB;
                             break;
                         case '/':
-                            doubleA /= doubleB;
-                            break;
+                            if (0 != doubleB) {
+                                doubleA /= doubleB;
+                                break;
+                            } else {
+                                throw new Exception("division by zero is forbidden");
+                            }
                         case '*':
                             doubleA *= doubleB;
                             break;
@@ -112,7 +120,13 @@ public class CalculatorUtil {
                             break;
                         case '^':
                             doubleA = Math.pow(doubleA, doubleB);
-                            break;
+                            if (doubleA > Double.MAX_VALUE) {
+                                throw new Exception("Calculation result exceeds the allowable maximum value");
+                            } else if (doubleA < Double.MIN_VALUE) {
+                                throw new Exception("Calculation result exceeds the allowable  minimum value");
+                            } else {
+                                break;
+                            }
                         default:
                             throw new Exception("Illegal operation " + stringTmp);
                     }
@@ -121,8 +135,8 @@ public class CalculatorUtil {
                     doubleA = Double.parseDouble(stringTmp);
                     stack.push(doubleA);
                 }
-            } catch (Exception e) {
-                throw new Exception("Illegal symbol in expression");
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Illegal symbol in expression");
             }
         }
 
